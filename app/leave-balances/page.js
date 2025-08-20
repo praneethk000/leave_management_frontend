@@ -1,64 +1,7 @@
-// // app/leave-balances/page.js
-// "use client";
-
-// import { useState } from "react";
-
-// export default function LeaveBalances() {
-//     // Mock data for UI only
-//     const [balances, setBalances] = useState([
-//         { id: "1", employeeName: "Alice Johnson", totalDays: 24, usedDays: 5, pendingDays: 2 },
-//         { id: "2", employeeName: "Bob Smith", totalDays: 24, usedDays: 10, pendingDays: 1 },
-//     ]);
-
-//     const [newBalance, setNewBalance] = useState({
-//         employeeId: "",
-//         totalDays: 24,
-//         usedDays: 0,
-//         pendingDays: 0,
-//     });
-
-//     const handleInitialize = (e) => {
-//         e.preventDefault();
-//         // Later: API call
-//         setBalances([...balances, { id: Date.now().toString(), employeeName: "New Employee", ...newBalance }]);
-//         setNewBalance({ employeeId: "", totalDays: 24, usedDays: 0, pendingDays: 0 });
-//     };
-
-//     return (
-//         <div className="min-h-screen bg-gray-100 p-8">
-//             <h2 className="text-2xl font-semibold mb-6 text-gray-800">Leave Balances</h2>
-
-//             {/* Leave Balances Table */}
-//             <div className="bg-white shadow-md rounded-lg p-6 mb-8">
-//                 <table className="w-full text-left border-collapse">
-//                     <thead>
-//                         <tr className="border-b text-gray-600">
-//                             <th className="p-3">Employee</th>
-//                             <th className="p-3">Total Days</th>
-//                             <th className="p-3">Used Days</th>
-//                             <th className="p-3">Pending Days</th>
-//                         </tr>
-//                     </thead>
-//                     <tbody>
-//                         {balances.map((balance) => (
-//                             <tr key={balance.id} className="border-b hover:bg-gray-50">
-//                                 <td className="p-3">{balance.employeeName}</td>
-//                                 <td className="p-3">{balance.totalDays}</td>
-//                                 <td className="p-3">{balance.usedDays}</td>
-//                                 <td className="p-3">{balance.pendingDays}</td>
-//                             </tr>
-//                         ))}
-//                     </tbody>
-//                 </table>
-//             </div>
-//         </div>
-//     );
-// }
-
-
 "use client";
 
 import { useState, useEffect } from "react";
+
 
 export default function LeaveBalances() {
     const [balances, setBalances] = useState([]);
@@ -91,7 +34,15 @@ export default function LeaveBalances() {
     }, []);
 
     if (loading) {
-        return <div className="p-8">Loading leave balances...</div>;
+        return (
+            <div class="loadingspinner" className="bg-blue-600">
+                <div id="square1"></div>
+                <div id="square2"></div>
+                <div id="square3"></div>
+                <div id="square4"></div>
+                <div id="square5"></div>
+            </div>
+        )
     }
 
     return (
