@@ -68,7 +68,7 @@ export default function LeaveBalances() {
     useEffect(() => {
         async function fetchBalances() {
             try {
-                const res = await fetch("http://localhost:8080/web/api/leaveBalance/v1/getAllLeaveBalance");
+                const res = await fetch("https://leave-management-backend-1-i8i6.onrender.com/web/api/leaveBalance/v1/getAllLeaveBalance");
                 const data = await res.json();
                 // Transform backend data into UI-friendly format
                 const formatted = data.map((b) => ({
