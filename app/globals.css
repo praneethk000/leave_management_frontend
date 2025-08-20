@@ -1,6 +1,15 @@
 @import "tailwindcss";
 
 /* From Uiverse.io by Nawsome */
+/* Fullscreen container */
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
 .loadingspinner {
     --square: 26px;
     --offset: 30px;
@@ -15,8 +24,8 @@
     padding: 0px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 10px;
-    margin-bottom: 30px;
+    margin-top: auto;
+    margin-bottom: auto;
     position: relative;
 }
 

@@ -1,111 +1,3 @@
-// "use client";
-// import { useState } from "react";
-
-// export default function EmployeesPage() {
-//     // For now, static data. Later we'll fetch from backend.
-//     const [employees, setEmployees] = useState([
-//         { id: 1, name: "John Doe", email: "john@example.com", role: "Developer" },
-//         { id: 2, name: "Jane Smith", email: "jane@example.com", role: "HR" },
-//     ]);
-
-//     // Controlled form state
-//     const [formData, setFormData] = useState({
-//         name: "",
-//         email: "",
-//         role: "",
-//     });
-
-//     const handleChange = (e) => {
-//         setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-//     };
-
-//     const handleSubmit = (e) => {
-//         e.preventDefault();
-//         // Later we’ll call backend. For now just add to state.
-//         const newEmployee = {
-//             id: employees.length + 1,
-//             ...formData,
-//         };
-//         setEmployees([...employees, newEmployee]);
-//         setFormData({ name: "", email: "", role: "" });
-//     };
-
-//     return (
-//         <div className="min-h-screen bg-gray-100 p-8">
-//             <h2 className="text-2xl font-semibold mb-6 text-gray-800">Employees</h2>
-
-//             {/* Employee List */}
-//             <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-//                 <h3 className="text-lg font-semibold mb-4 text-gray-700">Employee List</h3>
-//                 <table className="w-full border-collapse">
-//                     <thead>
-//                         <tr className="bg-gray-200 text-left">
-//                             <th className="p-3">ID</th>
-//                             <th className="p-3">Name</th>
-//                             <th className="p-3">Email</th>
-//                             <th className="p-3">Role</th>
-//                         </tr>
-//                     </thead>
-//                     <tbody>
-//                         {employees.map((emp) => (
-//                             <tr key={emp.id} className="border-b hover:bg-gray-50">
-//                                 <td className="p-3">{emp.id}</td>
-//                                 <td className="p-3">{emp.name}</td>
-//                                 <td className="p-3">{emp.email}</td>
-//                                 <td className="p-3">{emp.role}</td>
-//                             </tr>
-//                         ))}
-//                     </tbody>
-//                 </table>
-//             </div>
-
-//             {/* Create Employee Form */}
-//             <div className="bg-white rounded-lg shadow-md p-6">
-//                 <h3 className="text-lg font-semibold mb-4 text-gray-700">Add New Employee</h3>
-//                 <form onSubmit={handleSubmit} className="grid gap-4 md:grid-cols-3">
-//                     <input
-//                         type="text"
-//                         name="name"
-//                         placeholder="Full Name"
-//                         value={formData.name}
-//                         onChange={handleChange}
-//                         className="p-2 border rounded"
-//                         required
-//                     />
-//                     <input
-//                         type="email"
-//                         name="email"
-//                         placeholder="Email Address"
-//                         value={formData.email}
-//                         onChange={handleChange}
-//                         className="p-2 border rounded"
-//                         required
-//                     />
-//                     <input
-//                         type="text"
-//                         name="role"
-//                         placeholder="Role"
-//                         value={formData.role}
-//                         onChange={handleChange}
-//                         className="p-2 border rounded"
-//                         required
-//                     />
-//                     <button
-//                         type="submit"
-//                         className="col-span-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
-//                     >
-//                         Add Employee
-//                     </button>
-//                 </form>
-//             </div>
-//         </div>
-//     );
-// }
-
-
-
-
-
 "use client";
 import { useEffect, useState } from "react";
 import api from "@/utils/api";
@@ -118,6 +10,8 @@ export default function EmployeeManagementPage() {
         department: "",
         joiningDate: "",
     });
+    const [loading, setLoading] = useState(true);
+
 
     // Fetch all employees on load
     const fetchEmployees = async () => {
@@ -131,7 +25,16 @@ export default function EmployeeManagementPage() {
     };
 
     useEffect(() => {
-        fetchEmployees();
+        try {
+            fetchEmployees();
+        }
+        catch (error) {
+            console.error(error);
+        }
+        finally {
+            setLoading(false);
+        }
+
     }, []);
 
     // Handle create employee
@@ -157,6 +60,20 @@ export default function EmployeeManagementPage() {
             console.error("Error deleting employee", error);
         }
     };
+
+    if (loading) {
+        return (
+            <div class="loading-container">
+                <div class="loadingspinner">
+                    <div id="square1"></div>
+                    <div id="square2"></div>
+                    <div id="square3"></div>
+                    <div id="square4"></div>
+                    <div id="square5"></div>
+                </div>
+            </div>
+        )
+    }
 
     return (
         <div className="p-6">

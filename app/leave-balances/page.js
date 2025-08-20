@@ -11,7 +11,7 @@ export default function LeaveBalances() {
     useEffect(() => {
         async function fetchBalances() {
             try {
-                const res = await fetch("https://leave-management-backend-1-i8i6.onrender.com/web/api/leaveBalance/v1/getAllLeaveBalance");
+                const res = await fetch("http://localhost:8080/web/api/leaveBalance/v1/getAllLeaveBalance");
                 const data = await res.json();
                 // Transform backend data into UI-friendly format
                 const formatted = data.map((b) => ({
@@ -35,12 +35,14 @@ export default function LeaveBalances() {
 
     if (loading) {
         return (
-            <div class="loadingspinner" className="bg-blue-600">
-                <div id="square1"></div>
-                <div id="square2"></div>
-                <div id="square3"></div>
-                <div id="square4"></div>
-                <div id="square5"></div>
+            <div class="loading-container">
+                <div class="loadingspinner">
+                    <div id="square1"></div>
+                    <div id="square2"></div>
+                    <div id="square3"></div>
+                    <div id="square4"></div>
+                    <div id="square5"></div>
+                </div>
             </div>
         )
     }
